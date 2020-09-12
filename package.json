@@ -15,7 +15,5 @@
     "url": "https://github.com/jamesjenner"
   },
   "license": "MIT",
-  "dependencies": {
-    "diagram-js": "^6.7.0"
-  }
+  "dependencies": {}
 }
