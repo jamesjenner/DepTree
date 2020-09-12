@@ -1,0 +1,105 @@
+libs: 
+
+https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js
+
+css: https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css
+
+html:
+
+<p>
+  Nodes can have all sorts of shapes. Note the exception where the nodes with
+  text inside and the text type&apos;s size are determined by the font size, not
+  the node size.
+</p>
+<div id="mynetwork"></div>
+
+<div id="info"></div>
+
+
+
+css:
+
+#mynetwork {
+  width: 1000px;
+  height: 800px;
+  border: 1px solid lightgray;
+  background: black;
+}
+
+js:
+
+var nodes = null;
+var edges = null;
+var network = null;
+
+function draw() {
+  nodes = [
+    {
+      id: 1,
+      shapeProperties: { borderDashes: false },
+      icon: { code: "\uf160", color: '#ffffffbc' },
+    },
+    {
+      id: 2,
+      label: "Bravo",
+      icon: { code: "\uf164", color: '#ffffffbc' },
+    },
+  ];
+
+  edges = [{ from: 1, to: 2, arrows: { to: { enabled: false } } }];
+
+  // create a network
+  var container = document.getElementById("mynetwork");
+  var data = {
+    nodes: nodes,
+    edges: edges,
+  };
+  var options = { 
+    manipulation: {
+      enabled: true
+    },
+    layout: {
+      hierarchical: {
+        sortMethod: "directed",
+        shakeTowards: "roots",
+      }
+    },
+    nodes: {
+      borderWidth: 2,
+      font: { size: 30 },
+      size: 30,
+      shape: "dot",
+      shapeProperties: { borderDashes: [5, 5] },
+      chosen: { label: false, node: changeChosenNodeBorderColor },
+      color: {
+        background: "#7e659200",
+        border: "orange",
+        hightlight: {
+          background: "#5c5c5c",
+          border: "red"
+        }
+      },
+      icon: { code: "\uf0c2", color: '#ffffffbc' },
+    },
+    edges: {
+      smooth: false,
+      arrows: { to: false, from: false },
+      chosen: false,
+    },   
+    physics: false, // barnesHut: { gravitationalConstant: -4000 } 
+    interaction: {
+      hover: true,
+    }
+    
+  };
+  network = new vis.Network(container, data, options);
+}
+
+window.addEventListener("load", () => {
+  draw();
+});
+
+var changeChosenNodeBorderColor = function (values, id, selected, hovering) {
+  values.borderColor = "#5599ff";
+  // values.icon.color = "#ff0000";
+};

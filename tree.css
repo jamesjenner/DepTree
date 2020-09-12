@@ -1,0 +1,28 @@
+#mynetwork {
+  width: 1000px;
+  height: 800px;
+  border: 1px solid lightgray;
+  background: #15181C;
+}
+
+#node-popUp {
+  display: none;
+  position: absolute;
+  top: 350px;
+  left: 170px;
+  z-index: 299;
+  width: 250px;
+  height: 120px;
+  background-color: #f9f9f9;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #5394ed;
+  padding: 10px;
+  text-align: center;
+}
+
+#input_output {
+  height: 10%;
+  width: 15%;
+}
+

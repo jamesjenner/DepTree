@@ -1,0 +1,83 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CAD UX Tree</title>
+        
+        <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" media="all" href="tree.css" />
+    </head>
+    <body>
+        <p>
+          Text goes here...
+        </p>
+        <div id="mynetwork"></div>
+
+        <div id="info"></div>
+
+        <script src="tree.js"></script>
+        <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+       
+        <div>
+          <textarea id="input_output">
+          </textarea>
+          <input
+            type="button"
+            id="import_button"
+            onclick="importNetwork()"
+            value="import"
+          />
+          <input
+            type="button"
+            id="export_button"
+            onclick="exportNetwork()"
+            value="export"
+          />
+          <input
+            type="button"
+            id="destroy_button"
+            onclick="destroyNetwork()"
+            value="clear diagram"
+          />
+        </div>
+        
+        <div id="node-popUp">
+          <span id="node-operation">node</span> <br />
+          <table style="margin: auto">
+            <tbody>
+<!--
+              <tr>
+                <td>id</td>
+                <td><input id="node-id" value="new value" /></td>
+              </tr>
+-->
+              <tr>
+                <td><label for="node-label">Label</label></td>
+                <td><input id="node-label" value="new value" /></td>
+              </tr>
+              <tr>
+                <td><label for="node-state">State</label></td>
+                <td>
+                <select id="node-state" name="State">
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="fiat">Fiat</option>
+                    </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input type="button" value="save" id="node-saveButton" />
+          <input type="button" value="cancel" id="node-cancelButton" />
+        </div>
+        
+    </body>
+</html>
+
+
+  <label for="cars">Choose a car:</label>
+  <select id="cars" name="cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="fiat">Fiat</option>
+    <option value="audi">Audi</option>
+  </select>
