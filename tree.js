@@ -1,14 +1,44 @@
 
-var changeChosenNodeBorderColor = function (values, id, selected, hovering) {
-  values.borderColor = "#5599ff";
-  // values.icon.color = "#ff0000";
+var setNodeSelected = function (values, id, selected, hovering) {
+  if(hovering) {
+    values.borderColor = BORDER_COLOR_HOVER;
+  }
+  
+  if(selected) {
+    values.color = NODE_BACKGROUND_COLOR_SELECTED;
+    values.bordercolor = BORDER_COLOR_SELECTED;
+  }
 };
 
 const nodeStates = {
+  PLANNED: 'Planned',
   WIP: 'Wip',
   DONE: 'Done',
-  PLANNED: 'Planned'
 }
+
+const BORDER_COLOR_PLANNED = "#6E8097";
+const LABEL_COLOR_PLANNED = "#6E8097";
+
+const BORDER_COLOR_WIP = "#EB8243";
+const LABEL_COLOR_WIP = "#EB8243";
+
+const BORDER_COLOR_DONE = "#EB8243";
+const LABEL_COLOR_DONE = "#EB8243";
+
+const BORDER_COLOR_HOVER = "#5599ff";
+// const LABEL_COLOR_PLANNED = "";
+
+const BORDER_COLOR_SELECTED = "#5599ff";
+// const LABEL_COLOR_PLANNED = "";
+
+const BACKGROUND_COLOR = "#15181C";
+
+const NODE_BACKGROUND_COLOR = "#15181C";
+const NODE_BACKGROUND_COLOR_HOVER = "#15181C";
+const NODE_BACKGROUND_COLOR_SELECTED = "#5599ff55";
+
+
+
 
 const nodes = [
   {
@@ -17,9 +47,9 @@ const nodes = [
     shapeProperties: { borderDashes: false },
     icon: { code: "\uf160"},
     color: {
-      border: "#6E8097",
+      border: BORDER_COLOR_DONE,
     },
-    font: { color: "#6E8097"},
+    font: { color: LABEL_COLOR_DONE},
   },
   {
     id: 2,
@@ -29,12 +59,16 @@ const nodes = [
   {
     id: 3,
     label: "Charli",
-    shapeProperties: { borderDashes: false },
+    shapeProperties: { borderDashes: [5, 5] },
+    state: nodeStates.WIP,
+    color: {
+      border: BORDER_COLOR_WIP,
+    },
+    font: { color: LABEL_COLOR_WIP},
   },
   {
     id: 4,
     label: "Fred",
-    state: nodeStates.WIP,
   },
 ];
 
@@ -56,10 +90,6 @@ const extended = [
   {
     id: 3,
     state: nodeStates.DONE,
-  },
-  {
-    id: 4,
-    state: nodeStates.WIP,
   },
 ]
 
@@ -86,18 +116,22 @@ const options =  {
     hierarchical: {
       sortMethod: "directed",
       shakeTowards: "roots",
+//      levelSeperation: 150,
+//      treeSpacing: 200,
+//      blockShifting: false,
+      nodeSpacing: 450,
     }
   },
   nodes: {
     borderWidth: 2,
-    font: { size: 22, color: "#EB8243", background: "#15181C" },
+    font: { size: 22, color: LABEL_COLOR_PLANNED, background: BACKGROUND_COLOR },
     size: 30,
     shape: "dot",
-    shapeProperties: { borderDashes: [5, 5] },
-    chosen: { label: false, node: changeChosenNodeBorderColor },
+    shapeProperties: { borderDashes: false },
+    chosen: { label: false, node: setNodeSelected },
     color: {
-      background: "#15181C",
-      border: "#EB8243",
+      background: NODE_BACKGROUND_COLOR,
+      border: BORDER_COLOR_PLANNED,
       highlight: {
         background: "#5c5c5c",
         border: "red"
@@ -228,6 +262,20 @@ function destroyNetwork() {
   network.destroy();
 }
 
+function importNetwork() {
+  var inputValue = exportArea.value;
+  var inputData = JSON.parse(inputValue);
+
+  var data = {
+    nodes: inputData.nodes,
+    edges: inputData.edges,
+  };
+
+  network = new vis.Network(container, data, options);
+
+  resizeExportArea();
+}
+
 function addConnections(elem, index) {
   // need to replace this with a tree of the network, then get child direct children of the element
   elem.connections = network.getConnectedNodes(index);
@@ -258,9 +306,12 @@ function TreeData(nodes, edges, extended) {
 }
 
 function getNodeState(data) {
+  if(data.shapeProperties == undefined) {
+    return nodeStates.PLANNED;  
+  }
   if(data.shapeProperties.borderDashes != false) {
     return nodeStates.WIP;
-  } else if(data.color.border == "#6E8097") {
+  } else if(data.color.border == BORDER_COLOR_PLANNED) {
     return nodeStates.PLANNED;
   }
   
@@ -269,25 +320,56 @@ function getNodeState(data) {
 
 function setToDone(data) {
   data.shapeProperties = { borderDashes: false };
-  data.color = { border: "#EB8243" };
-  data.font = { color: "#EB8243"};
+  data.color = { border: BORDER_COLOR_DONE };
+  data.font = { color: LABEL_COLOR_DONE};
   return data;
 }
 
 function setToWip(data) {
   data.shapeProperties = { borderDashes: [5, 5] };
-  data.color = { border: "#EB8243" };
-  data.font = { color: "#EB8243"};
+  data.color = { border: BORDER_COLOR_WIP };
+  data.font = { color: LABEL_COLOR_WIP};
   return data;
 }
 
 function setToPlanned(data) {
   data.shapeProperties = { borderDashes: false };
-  data.color = { border: "#6E8097" };
-  data.font = { color: "#6E8097"};
+  data.color = { border: BORDER_COLOR_PLANNED };
+  data.font = { color: LABEL_COLOR_PLANNED};
   
   return data;
 }
 
+/* 
 
+https://visjs.github.io/vis-network/docs/network/#methodManipulation
+
+*/
+
+//function editMode() {
+//  network.enableEditMode();
+//}
+//function addNode() {
+//  network.addNodeMode();
+//}
+//function editNode() {
+//  network.editNode();
+//}
+//function addLink() {
+//  network.addEdgeMode();
+//}
+//function deleteSomething() {
+//  network.deleteSelected();
+//}
       
+
+// webui
+webui.ready(function() {
+
+  ui("#menuAction").navButtonControl({ 
+    transitionDuration: 300, 
+    backgroundColor: "rgb(92, 107, 192)", 
+    color: "#FFF"
+  });
+
+});

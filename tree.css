@@ -1,9 +1,11 @@
+/*
 #mynetwork {
-  width: 1000px;
+  width: 100%;
   height: 800px;
-  border: 1px solid lightgray;
+  border: none;
   background: #15181C;
 }
+*/
 
 #node-popUp {
   display: none;

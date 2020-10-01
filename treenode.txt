@@ -1,3 +1,13 @@
+UI lib?
+
+https://asyncdesign.github.io/webui/getting_started.html - seems the better one
+
+Vanilla slide out: https://codepen.io/metalskin/pen/poyBbQx
+
+Vanilla popup: https://codepen.io/metalskin/pen/qBZwNLd
+
+
+
 libs: 
 
 https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js

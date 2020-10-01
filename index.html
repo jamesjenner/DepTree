@@ -4,16 +4,38 @@
         <title>CAD UX Tree</title>
         
         <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="webui-components-all.min.css"> 
         <link rel="stylesheet" media="all" href="tree.css" />
     </head>
     <body>
-        <p>
-          Text goes here...
-        </p>
-        <div id="mynetwork"></div>
+<!--
+        <div>
+          <input type="button" id="editMode" onclick="editMode()" value="Edit" />
+        </div>
+-->     
+      <div class="flex-col width-lg-x1 height-x1">
+<!--
+        <header class="accent-5-dark height-sm pad-sm">
+          Header
+        </header>
+-->
 
-        <div id="info"></div>
+        <div>
+          <div class="dock-top-right pad-sm">
+            <div class="nav-button-sm" id="menuAction"></div>
+          </div>
+          <div id="mynetwork" class="flex-auto width-full height-xxl background-accent-5-dark">
+          </div>
+        </div>
 
+        <footer class="background-accent-5-dark height-auto text-xs">
+          <blockquote class="boundary-left-accent-2 border-left-accent-3-dark background-accent-5-dark color-accent-2-light rounded-sm">
+            <p>Success is a terrible thing and a wonderful thing... Just do what you love</p>
+            <p class="text-sm text-italic background-accent-5-dark">- Gene Wilder</p>
+          </blockquote>
+        </footer>
+
+<!--
         <div>
           <textarea id="input_output">
           </textarea>
@@ -41,12 +63,6 @@
           <span id="node-operation">node</span> <br />
           <table style="margin: auto">
             <tbody>
-<!--
-              <tr>
-                <td>id</td>
-                <td><input id="node-id" value="new value" /></td>
-              </tr>
--->
               <tr>
                 <td><label for="node-label">Label</label></td>
                 <td><input id="node-label" value="new value" /></td>
@@ -66,9 +82,13 @@
           <input type="button" value="save" id="node-saveButton" />
           <input type="button" value="cancel" id="node-cancelButton" />
         </div>
+-->
         
     </body>
-    <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+<!--     <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script> -->
+<!--    <script src="vis-network.js"></script>-->
+    <script src="vis-network.min.js"></script>
+    <script src="webui-components.min.js"></script>
     <script src="tree.js"></script>
   
 </html>
