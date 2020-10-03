@@ -3,38 +3,61 @@
         <meta charset="utf-8">
         <title>CAD UX Tree</title>
         
-        <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="fontawesome-free-5/all.css" />
         <link rel="stylesheet" href="webui-components-all.min.css"> 
         <link rel="stylesheet" media="all" href="tree.css" />
     </head>
-    <body>
+    <body class="height-auto">
 <!--
         <div>
           <input type="button" id="editMode" onclick="editMode()" value="Edit" />
         </div>
 -->     
-      <div class="flex-col width-lg-x1 height-x1">
+      <div class="flex-col width-lg-x1 height-auto">
 <!--
         <header class="accent-5-dark height-sm pad-sm">
           Header
         </header>
 -->
 
-        <div>
-          <div class="dock-top-right pad-sm">
-            <div class="nav-button-sm" id="menuAction"></div>
+        <div class="height-auto">
+          <div class="toggle-container" data-transition-duration="300">	
+            <div id="rightPanel" class="toggle-item off-canvas-right dock-top-right accent-4-dark width-lg height-full layer-top pad-left-sm pad-right-sm">		
+              <h3 class="">Controls</h3>
+              <div class="gap-vertical-sm width-auto text-left">
+                <button id="addNode" type="button" class="button-sm button-accent-2 pad-sm text-left">
+                  <span class="far fa-circle"></span>
+                  <span class="pad-left-xs">New node</span>
+                </button>
+                <button id="editNode" type="button" class="button-sm button-accent-2 pad-sm text-left">
+                  <span class="fas fa-pen"></span>
+                  <span class="pad-left-xs">Edit node</span>
+                </button>
+                <button id="addLink" type="button" class="button-sm button-accent-2 pad-sm text-left">
+                  <span class="fas fa-link"></span>
+                  <span class="pad-left-xs">New link</span>
+                </button>
+                <button id="delete" type="button" class="button-sm button-accent-2 pad-sm text-left">
+                  <span class="far fa-trash-alt"></span>
+                  <span class="pad-left-xs">Delete</span>
+                </button>
+              </div>
+            </div>
+            <div class="dock-top-right pad-sm" style="z-index: 999">
+              <div type="button" class="toggle-activator nav-button-sm " id="menuAction" data-target="#rightPanel" ></div>
+            </div>
           </div>
-          <div id="mynetwork" class="flex-auto width-full height-xxl background-accent-5-dark">
+          
+          <div id="mynetwork" class="flex-auto width-full height-viewport background-accent-5-dark">
           </div>
         </div>
 
-        <footer class="background-accent-5-dark height-auto text-xs">
-          <blockquote class="boundary-left-accent-2 border-left-accent-3-dark background-accent-5-dark color-accent-2-light rounded-sm">
-            <p>Success is a terrible thing and a wonderful thing... Just do what you love</p>
-            <p class="text-sm text-italic background-accent-5-dark">- Gene Wilder</p>
+        <footer class="background-accent-5-dark height-auto text-xs dock-bottom-left">
+          <blockquote class="boundary-left-accent-2 border-left-accent-5-dark background-accent-5-dark color-accent-2-light rounded-sm pad-sm margin-top-">
+            <p class="text-sm text-italic margin-initial">In ancient times cats were worshipped as gods; they have not forgotten this.</p>
+            <p class="text-xs background-accent-5-dark margin-bottom-initial">- Terry Pratchett</p>
           </blockquote>
         </footer>
-
 <!--
         <div>
           <textarea id="input_output">
@@ -59,6 +82,8 @@
           />
         </div>
         
+-->
+
         <div id="node-popUp">
           <span id="node-operation">node</span> <br />
           <table style="margin: auto">
@@ -82,13 +107,13 @@
           <input type="button" value="save" id="node-saveButton" />
           <input type="button" value="cancel" id="node-cancelButton" />
         </div>
--->
+
         
     </body>
 <!--     <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script> -->
 <!--    <script src="vis-network.js"></script>-->
     <script src="vis-network.min.js"></script>
-    <script src="webui-components.min.js"></script>
+    <script src="webui-components.js"></script>
     <script src="tree.js"></script>
   
 </html>
