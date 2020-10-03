@@ -31,13 +31,11 @@ const BORDER_COLOR_HOVER = "#5599ff";
 const BORDER_COLOR_SELECTED = "#5599ff";
 // const LABEL_COLOR_PLANNED = "";
 
-const BACKGROUND_COLOR = "#15181C";
+const BACKGROUND_COLOR = "#212121";
 
-const NODE_BACKGROUND_COLOR = "#15181C";
+const NODE_BACKGROUND_COLOR = "#212121";
 const NODE_BACKGROUND_COLOR_HOVER = "#15181C";
 const NODE_BACKGROUND_COLOR_SELECTED = "#5599ff55";
-
-
 
 
 const nodes = [
@@ -100,7 +98,8 @@ const data = {
 
 const options =  { 
   manipulation: { 
-    // enabled: true }, 
+    enabled: false, 
+    initiallyActive: false,
     addNode: function (data, callback) {
       // filling in the popup DOM elements
       document.getElementById("node-operation").innerHTML = "Add Node";
@@ -152,7 +151,6 @@ const options =  {
 };
 
 var network = null;
-
 var exportArea;
 var importButton;
 var exportButton;
@@ -164,7 +162,13 @@ function draw() {
   
   // create a network
   network = new vis.Network(container, data, options);
+  
+//  network.on("zoom", function (params) {
+//    console.log("zoom level: " + params.scale);
+//  });
 }
+
+
 
 window.addEventListener("load", () => {
   container = document.getElementById("mynetwork");
@@ -198,6 +202,8 @@ function editNode(data, cancelAction, callback) {
   );
   
   document.getElementById("node-popUp").style.display = "block";
+  
+  ui.hideAlert(webui(".alert").first());
 }
 
 // Callback passed as parameter is ignored
@@ -210,6 +216,7 @@ function clearNodePopUp() {
 function cancelNodeEdit(callback) {
   clearNodePopUp();
   callback(null);
+  network.disableEditMode();
 }
 
 /*
@@ -243,6 +250,8 @@ function saveNodeData(data, callback) {
   
   // let visjs apply the data to the network graph
   callback(data);
+  
+  network.disableEditMode();
 }
 
 function exportNetwork() {
@@ -346,30 +355,48 @@ https://visjs.github.io/vis-network/docs/network/#methodManipulation
 
 */
 
-//function editMode() {
-//  network.enableEditMode();
-//}
-//function addNode() {
-//  network.addNodeMode();
-//}
-//function editNode() {
-//  network.editNode();
-//}
-//function addLink() {
-//  network.addEdgeMode();
-//}
-//function deleteSomething() {
-//  network.deleteSelected();
-//}
-      
-
 // webui
 webui.ready(function() {
-
   ui("#menuAction").navButtonControl({ 
     transitionDuration: 300, 
-    backgroundColor: "rgb(92, 107, 192)", 
+    backgroundColor: "", 
     color: "#FFF"
   });
+  
+  ui.initAlerts({
+    position: "top-center",
+    duration: 6000,
+    transitionDuration: 300,
+    width: "30rem",
+    showHeader: true,
+    inline: true,
+    style: "outline-rounded",
+    autoHide: false,
+    showIcon: true,
+    showClose: true
+  });
+  
+  ui("#menuAction").click(function() {
+    ui(this).toggleClass("active");
+  });
 
+  ui("#addNode").click(function() {
+    // do stuff
+    ui.showInfoAlert("Select where to add the point", false, true, false);
+    network.addNodeMode();
+  });
+  ui("#editNode").click(function() {
+    // do stuff
+    network.editNode();    
+  });
+  ui("#addLink").click(function() {
+    // do stuff
+    ui.showInfoAlert("Drag between nodes to add link", false, true, false);
+    network.addEdgeMode();    
+  });
+  ui("#delete").click(function() {
+    // do stuff
+    network.deleteSelected();
+  });
 });
+
