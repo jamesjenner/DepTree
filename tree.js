@@ -109,7 +109,12 @@ const options =  {
       // filling in the popup DOM elements
       document.getElementById("node-operation").innerHTML = "Edit Node";
       editNode(data, cancelNodeEdit, callback);
-    }
+    },
+    addEdge: function (data, callback) {
+      // hide the oldest alert
+      ui.hideAlert(webui(".alert").first());
+      callback(data);
+    },
   },
   layout: {
     hierarchical: {
@@ -203,6 +208,7 @@ function editNode(data, cancelAction, callback) {
   
   document.getElementById("node-popUp").style.display = "block";
   
+  // hide the oldest alert
   ui.hideAlert(webui(".alert").first());
 }
 
