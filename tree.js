@@ -168,6 +168,11 @@ function draw() {
   // create a network
   network = new vis.Network(container, data, options);
   
+  network.on("selectNode", function(o) {
+      console.log(JSON.stringify(o));
+  });
+
+  
 //  network.on("zoom", function (params) {
 //    console.log("zoom level: " + params.scale);
 //  });
