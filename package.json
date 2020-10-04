@@ -15,5 +15,7 @@
     "url": "https://github.com/jamesjenner"
   },
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "cirrus-ui": "^0.5.5"
+  }
 }
