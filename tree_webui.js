@@ -1,3 +1,9 @@
+/*
+ * network tree using webui - https://asyncdesign.github.io/webui/index.html
+ *
+ * WebUI is a tad limiting when it comes to popups. Only have modal.
+ *
+ */
 
 var setNodeSelected = function (values, id, selected, hovering) {
   if(hovering) {
