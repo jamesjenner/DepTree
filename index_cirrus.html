@@ -69,7 +69,7 @@
           <a href="#components" class="u-pull-right" aria-label="Close">
             <span class="icon"><i class="fa fa-wrapper fa-times"></i></span>
           </a>
-          <div class="modal-title">Item</div>
+          <div id="node-dialog-title" class="modal-title">Add Item</div>
         </div>
         <div class="modal-body">
           <div class="form-section">
@@ -86,18 +86,17 @@
           </div>
           <div class="form-section">
             <label for="node-description" class="font-normal">Description</label>
-            <textarea placeholder="Describe this item...">
-            </textarea>
+            <textarea placeholder="Describe this item..."></textarea>
           </div>
         </div>
         <div class="modal-footer">
           <div class="u-flex">
             <div class="level-left level-content"><a href="#components" style="display: inline-block;">
-              <button class="btn-small">Cancel</button></a>
+              <button id="btnAddNodeCancel" class="btn-small">Cancel</button></a>
             </div>
             <div class="level-right level-content">
               <a href="#components" style="display: inline-block">
-                <button class="btn-primary btn-small" style="padding: 0 1rem">Save</button>
+                <button id="btnAddNodeSave" class="btn-primary btn-small" style="padding: 0 1rem">Save</button>
               </a>
             </div>
           </div>
