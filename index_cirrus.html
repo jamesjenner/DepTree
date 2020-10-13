@@ -9,12 +9,56 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">      
 
-    <link rel="stylesheet" href="fontawesome-free-5/all.css" />
+    <link rel="stylesheet" href="./fontawesome-free-5/all.css" />
     <link rel="stylesheet" type="text/css" href="css/cirrus.min.css">
     <link rel="stylesheet" type="text/css" href="css/tree_cirrus.css" />
+    <style>
+      :root {
+        --cirrus-info: #77c;
+        --cirrus-dark: #212121;
+/*
+    // base color scheme for cirrus
+        
+    --cirrus-fg: #374054;
+    --cirrus-bg: #fff;
 
-    <!-- why oh why are we using jquery??? -->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    --cirrus-primary: #f03d4d;
+    --cirrus-primary-light: #ffdadd;
+    --cirrus-accent-hover: #d62939;
+    --cirrus-accent-border: #c21b2b;
+    --cirrus-light: #f6f9fc;
+    --cirrus-light-gray: #f8f9fa;
+    --cirrus-gray: #d5d7dc;
+    --cirrus-dark-gray: #909090;
+    --cirrus-dark: #363636;
+    --cirrus-link: #5e5cc7;
+    --cirrus-link-dark: #4643e2;
+    --cirrus-info: #2972fa;
+    --cirrus-success: #0dd157;
+    --cirrus-warning: #fab633;
+    --cirrus-danger: #fb4143;
+
+    --cirrus-light-hover: #d9e6f2;
+    --cirrus-dark-hover: #424242;
+    --cirrus-info-hover: #2368e9;
+    --cirrus-link-hover: #f8f7ff;
+    --cirrus-success-hover: #00b147;
+    --cirrus-warning-hover: #f9a90e;
+    --cirrus-danger-hover: #f1393c;
+
+    --cirrus-select-bg: rgba(0, 161, 255, 0.2);
+
+    --cirrus-code-bg: var(--cirrus-primary-light);
+    --cirrus-code-fg: #dc4753;
+
+    --cirrus-form-group-bg: var(--cirrus-light-gray);
+    --cirrus-form-group-fg: var(--cirrus-dark-gray);
+
+    --toast-primary-bg: rgba(49, 59, 80, 0.9);
+*/        
+        
+      }
+    </style>
   </head>
   <body class="bg-dark">
     <div class="row" style="position: absolute;">
@@ -49,11 +93,6 @@
       <button id="delete" class="btn-transparent btn-small btn-dark">
         <span class="icon fas fa-file-import"></span>Import
       </button>
-      <a href="#modal-id">
-        <button id="showModal" class="btn-transparent btn-small btn-dark">
-          <span class="icon fas fa-file-square"></span>Test Modal
-        </button>
-      </a>
     </div>
 
     <!-- had to remove the margin as it kept adding a horizontal scrollbar, not sure why right now -->
@@ -62,12 +101,14 @@
       <p id="infoToastText">Select where to add the point</p>
     </div>
 
-    <div class="modal modal-animated--zoom-in" id="modal-id">
-      <a href="#NON-EXISTANT-DIV" class="modal-overlay close-btn" aria-label="Close"></a>
+    <div class="modal modal-animated--zoom-in" id="modalEditNode">
+      <a href="#target" class="modal-overlay close-btn" aria-label="Close"></a>
       <div class="modal-content" role="document">
         <div class="modal-header">
-          <a href="#components" class="u-pull-right" aria-label="Close">
-            <span class="icon"><i class="fa fa-wrapper fa-times"></i></span>
+          <a href="#">
+            <button id="modal-cancel" class="u-pull-right btn-transparent btn-small" aria-label="close">
+              <span class="icon fa fa-wrapper fa-times"></span>
+            </button>
           </a>
           <div id="node-dialog-title" class="modal-title">Add Item</div>
         </div>
@@ -91,11 +132,13 @@
         </div>
         <div class="modal-footer">
           <div class="u-flex">
-            <div class="level-left level-content"><a href="#components" style="display: inline-block;">
-              <button id="btnAddNodeCancel" class="btn-small">Cancel</button></a>
+            <div class="level-left level-content">
+              <a href="#" style="display: inline-block;">
+                <button id="btnAddNodeCancel" class="btn-small">Cancel</button>
+              </a>
             </div>
             <div class="level-right level-content">
-              <a href="#components" style="display: inline-block">
+              <a href="#" style="display: inline-block">
                 <button id="btnAddNodeSave" class="btn-primary btn-small" style="padding: 0 1rem">Save</button>
               </a>
             </div>
@@ -111,10 +154,10 @@
       </div>
     </section>
     
-    <footer class="bg-dark footer-fixed">
-      <blockquote class="bg-dark fg-light bg-light-border-left" >
-        <p class="u-text-left fg-light">In ancient times cats were worshipped as gods; they have not forgotten this.</p>
-        <p class="u-text-left fg-light">- Terry Pratchett</p>
+    <footer class="bg-dark footer-fixed"  style="padding: .5rem">
+      <blockquote class="bg-dark" style="border-left-color: var(--cirrus-info)">
+        <p class="u-text-left text-info">In ancient times cats were worshipped as gods; they have not forgotten this.</p>
+        <p class="u-text-left text-info">- Terry Pratchett</p>
       </blockquote>
     </footer>
   </body>
