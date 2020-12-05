@@ -1,0 +1,181 @@
+:root {
+  --cirrus-info: #77c;
+  --cirrus-dark: #212121;
+  --planned: #7f7f7f;
+  --done: #EB8243;
+  --hover: #2196F3;
+  --icon-default: #e1e1e1;
+  --hover-secondary: #035797;
+  
+  --cirrus-primary: #2972fa;
+  --cirrus-accent-border: #2972fa;
+  --cirrus-accent-hover: #2368e9;
+/*  --cirrus-primary-light: red; TODO: add in a light version of primary */
+}
+
+/*
+    // base color scheme for cirrus - use in :root above to override
+        
+    --cirrus-fg: #374054;
+    --cirrus-bg: #fff;
+
+    --cirrus-primary: #f03d4d;
+    --cirrus-primary-light: #ffdadd;
+    --cirrus-accent-hover: #d62939;
+    --cirrus-accent-border: #c21b2b;
+    --cirrus-light: #f6f9fc;
+    --cirrus-light-gray: #f8f9fa;
+    --cirrus-gray: #d5d7dc;
+    --cirrus-dark-gray: #909090;
+    --cirrus-dark: #363636;
+    --cirrus-link: #5e5cc7;
+    --cirrus-link-dark: #4643e2;
+    --cirrus-info: #2972fa;
+    --cirrus-success: #0dd157;
+    --cirrus-warning: #fab633;
+    --cirrus-danger: #fb4143;
+
+    --cirrus-light-hover: #d9e6f2;
+    --cirrus-dark-hover: #424242;
+    --cirrus-info-hover: #2368e9;
+    --cirrus-link-hover: #f8f7ff;
+    --cirrus-success-hover: #00b147;
+    --cirrus-warning-hover: #f9a90e;
+    --cirrus-danger-hover: #f1393c;
+
+    --cirrus-select-bg: rgba(0, 161, 255, 0.2);
+
+    --cirrus-code-bg: var(--cirrus-primary-light);
+    --cirrus-code-fg: #dc4753;
+
+    --cirrus-form-group-bg: var(--cirrus-light-gray);
+    --cirrus-form-group-fg: var(--cirrus-dark-gray);
+
+    --toast-primary-bg: rgba(49, 59, 80, 0.9);
+*/        
+
+label {
+  font-size: .7em;
+  margin-bottom: 0;
+}
+
+textarea {
+  margin-top: 0;
+  margin-bottom: 0;
+  min-height: 4em;
+}
+
+.item 
+ellipse {
+  stroke-width: 3px;
+  fill: #ffffff00;
+}
+
+.item
+ellipse.done 
+{
+  stroke: var(--done);
+}
+
+.item
+ellipse.wip {
+  stroke: var(--done);
+  stroke-dasharray: 7, 5;
+}
+
+.item 
+ellipse.planned {
+  stroke: var(--planned);
+}
+
+.item:hover
+ellipse {
+  stroke: var(--hover);
+/*        fill:lightblue;*/
+}
+
+.item:hover
+.icon {
+  fill: var(--hover);
+}
+
+.line {
+  stroke: var(--done);
+  stroke-width: 3px;
+}
+
+.lineWIP {
+/*  stroke-dasharray: 7, 5; */
+}
+
+.linePlanned {
+  stroke: var(--planned);
+}
+
+/* TODO: review how icon and name are done */
+g > .icon {
+  cursor: default;
+  font-family: FontAwesome;
+  font-size: 45px;
+  fill: var(--icon-default);
+}
+
+g > .iconPlanned {
+  fill: var(--planned);
+}
+
+g > .modifyIconFA {
+  cursor: default;
+  font-family: FontAwesome;
+  font-size: 25px;
+  fill: var(--icon-default);
+  visibility: hidden;
+}
+
+.item:hover
+.modifyIcon {
+/*  visibility: visible;*/
+}
+
+g > .modifyIcon {
+  cursor: default;
+  font-size: 18px;
+  fill: var(--icon-default);
+  visibility: hidden;
+}
+
+g > .modifyIconDelete:hover {
+  fill: red;
+}
+
+g > .modifyIconAdd:hover {
+  fill: var(--hover);
+}
+
+.name {
+  fill: red;
+  font-size: 22px;
+  font-family: sans-serif;
+  font-weight: 400;
+  fill: var(--done);
+}
+
+.namePlanned {
+  stroke: none;
+  fill: var(--planned);
+}
+
+/* TODO: confirm that these are needed, copied from tree_cirrus.css */
+
+footer {
+  padding: .5rem 0;
+  margin-top: .5rem;
+}
+
+#networkEditPanel {
+  position: absolute; 
+/*  visibility:hidden; */
+  width:100%; 
+  opacity:0; 
+  transition: opacity 0.5s ease-in-out;
+}

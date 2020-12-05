@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Testing SVG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;">
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="./fontawesome-free-5/all.css" />
+    <link rel="stylesheet" type="text/css" href="css/cirrus.min.css">
+    <link rel="stylesheet" type="text/css" href="css/testsvg.css" />
+  </head>
+  <body class="bg-dark">
+    
+    <!-- hamberger button -->
+    <div class="row" style="position: absolute;">
+      <div>
+        <button id="openEditPanel" class="btn-dark btn-small btn-transparent">
+          <span class=" fas fa-wrapper fa-bars"></span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- menu for editing the items, hidden by default, activated via hamberger button  -->
+    
+    <div id="networkEditPanel" class="row" style="position: absolute; visibility:hidden; width:100%; opacity:0; transition: opacity 0.5s ease-in-out;">
+      <div>
+        <button id="closeEditPanel" class="btn-dark btn-small btn-transparent">
+          <span class=" fas fa-wrapper fa-times"></span>
+        </button>
+      </div>
+        
+<!--
+      <button id="addNode" class="btn-transparent btn-small btn-dark">
+        <span class="icon far fa-circle"></span>New item
+      </button>
+-->
+      
+      <button id="editMode" class="btn-transparent btn-small btn-dark">
+        <span class="icon far fa-wrapper fa-circle"></span>Edit mode
+      </button>
+      <button id="addLink" class="btn-transparent btn-small btn-dark">
+        <span class="icon fas fa-link"></span>New connection
+      </button>
+<!--
+      <button id="delete" class="btn-transparent btn-small btn-dark">
+        <span class="icon far fa-trash-alt"></span>Delete
+      </button>
+-->
+      <button id="delete" class="btn-transparent btn-small btn-dark">
+        <span class="icon fas fa-file-export"></span>Export
+      </button>
+      <button id="delete" class="btn-transparent btn-small btn-dark">
+        <span class="icon fas fa-file-import"></span>Import
+      </button>
+    </div>
+
+    <!-- action info message -->
+    <!-- had to remove the margin as it kept adding a horizontal scrollbar, not sure why right now -->
+    <div id="infoToast" class="toast toast--info" style="position: absolute; width:100%; margin: inherit; visibility: hidden; opacity:0; transition: opacity 0.2s ease-in-out;">
+      <button id="closeInfoToast" class="btn-close"></button>
+      <p id="infoToastText">Select where to add the point</p>
+    </div>
+
+    <!-- edit dialog -->
+    <div class="modal modal-animated--zoom-in" id="modalEditItem">
+      <a href="#target" class="modal-overlay close-btn" aria-label="Close"></a>
+      <div class="modal-content" role="document">
+        <div class="modal-header">
+          <a href="#">
+            <button id="modal-cancel" class="u-pull-right btn-transparent btn-small" aria-label="close">
+              <span class="icon fa fa-wrapper fa-times"></span>
+            </button>
+          </a>
+          <div id="itemTitle" class="modal-title">Add Item</div>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              <label for="itemName" class="font-normal">Name<span class="required">*</span></label>
+              <input id="itemName" placeholder="Enter the item name" value=""/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <label for="itemDescription" class="font-normal">Description</label>
+              <textarea id="itemDescription" placeholder="Describe this item..."></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="itemState">State<span class="required">*</span></label>
+              <select id="itemState" name="State">
+                <option value="Planned">Planned</option>
+                <option value="WIP">Work in progress</option>
+                <option value="Shipped">Shipped</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <label for="itemPosition">Position<span class="required">*</span></label>
+              <select id="itemPosition" name="Position">
+                <option value="Left">Left</option>
+                <option value="Right">Right</option>
+                <option value="Center">Center</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="itemReference" class="font-normal">Reference</label>
+              <input id="itemReference" placeholder="e.g. CAD-42" value=""/>
+            </div>
+            <div class="col-6">
+              <label for="itemReferenceType">Type</label>
+              <select id="itemReferenceType" name="Reference Type">
+                <option value="Story">Story</option>
+                <option value="Epic">Epic</option>
+                <option value="Defect">Defect</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          
+          <div class="u-flex">
+            <div class="level-left level-content">
+              <a href="#" style="display: inline-block;">
+                <button id="btnEditItemDelete" class="btn-small bg-danger text-light">Delete</button>
+              </a>
+            </div>
+            <div class="level-right level-content">
+              <a href="#" style="display: inline-block;">
+                <button id="btnEditItemCancel" class="btn-small">Cancel</button>
+              </a>
+              <a href="#" style="display: inline-block">
+                <button id="btnEditItemSave" class="btn-primary btn-small" style="padding: 0 1rem">Save</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>       
+    
+    <!-- Main content -->
+    <section class="section">
+      <div class="hero fullscreen">
+        <svg id="diagram" class="hero-body" xmlns="http://www.w3.org/2000/svg">
+        </svg>
+      </div>
+    </section>
+
+    
+    <footer class="bg-dark footer-fixed"  style="padding: .5rem">
+      <blockquote class="bg-dark" style="border-left-color: var(--cirrus-info)">
+        <p class="u-text-left text-info">In ancient times cats were worshipped as gods; they have not forgotten this.</p>
+        <p class="u-text-left text-info">- Terry Pratchett</p>
+      </blockquote>
+    </footer>
+  </body>
+  <script src="lib/network.js"></script>
+  <script src="lib/testsvg.js"></script>
+</html>
