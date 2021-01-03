@@ -1,17 +1,22 @@
 :root {
   --cirrus-info: #77c;
   --cirrus-dark: #212121;
-  --planned: #7f7f7f;
-  --done: #EB8243;
-  --hover: #2196F3;
-  --icon-default: #e1e1e1;
-  --hover-secondary: #035797;
   
   --cirrus-primary: #2972fa;
   --cirrus-accent-border: #2972fa;
   --cirrus-accent-hover: #2368e9;
+
+  --default: #EB8243;
+  --planned: #7f7f7f;
+  --done: #EB8243;
+  --hover: #2196F3;
+  --icon-default: #e1e1e1;
+  --icon-hover: #2196F3;
+  --hover-secondary: #035797;
+  
 /*  --cirrus-primary-light: red; TODO: add in a light version of primary */
 }
+
 
 /*
     // base color scheme for cirrus - use in :root above to override
@@ -65,59 +70,13 @@ textarea {
   min-height: 4em;
 }
 
-.item 
-ellipse {
-  stroke-width: 3px;
-  fill: #ffffff00;
-}
-
-.item
-ellipse.done 
-{
-  stroke: var(--done);
-}
-
-.item
-ellipse.wip {
-  stroke: var(--done);
-  stroke-dasharray: 7, 5;
-}
-
-.item 
-ellipse.planned {
-  stroke: var(--planned);
-}
-
-.item:hover
-ellipse {
-  stroke: var(--hover);
-/*        fill:lightblue;*/
-}
-
-.item:hover
-.icon {
-  fill: var(--hover);
-}
-
-.line {
-  stroke: var(--done);
-  stroke-width: 3px;
-}
-
-.lineWIP {
-/*  stroke-dasharray: 7, 5; */
-}
-
-.linePlanned {
-  stroke: var(--planned);
-}
 
 /* TODO: review how icon and name are done */
 g > .icon {
   cursor: default;
   font-family: FontAwesome;
   font-size: 45px;
-  fill: var(--icon-default);
+  /* fill: var(--icon-default); */
 }
 
 g > .iconPlanned {
@@ -132,11 +91,6 @@ g > .modifyIconFA {
   visibility: hidden;
 }
 
-.item:hover
-.modifyIcon {
-/*  visibility: visible;*/
-}
-
 g > .modifyIcon {
   cursor: default;
   font-size: 18px;
@@ -144,25 +98,25 @@ g > .modifyIcon {
   visibility: hidden;
 }
 
-g > .modifyIconDelete:hover {
+/* g > .modifyIconDelete:hover {
   fill: red;
-}
+} */
 
-g > .modifyIconAdd:hover {
-  fill: var(--hover);
+.modifyIconAdd:hover {
+  fill: var(--icon-hover);
 }
 
 .name {
-  fill: red;
+  /* fill: red; */
   font-size: 22px;
   font-family: sans-serif;
   font-weight: 400;
-  fill: var(--done);
+  /* fill: var(--done); */
 }
 
 .namePlanned {
   stroke: none;
-  fill: var(--planned);
+  /* fill: var(--planned); */
 }
 
 /* TODO: confirm that these are needed, copied from tree_cirrus.css */
