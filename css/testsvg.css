@@ -74,8 +74,9 @@ textarea {
 /* TODO: review how icon and name are done */
 g > .icon {
   cursor: default;
-  font-family: FontAwesome;
-  font-size: 45px;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  font-size: 40px;
   /* fill: var(--icon-default); */
 }
 
